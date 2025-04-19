@@ -31,21 +31,15 @@
             <option value="address">Address</option>
         </select>
 
-        {% if not submitted %}
-            <button type="submit" id="submit-btn">Submit</button>
-        {% else %}
-            <button type="button" disabled>Submit</button>  <!-- Button Disabled after submission -->
-        {% endif %}
+        <button type="submit">Submit</button>
     </form>
 
     {% if submitted %}
         <p><strong>{{ result }}</strong></p>
+        <a href="{{ url_for('next_quote') }}">
+            <button>Next Quote</button>
+        </a>
     {% endif %}
-
-    <!-- Next button -->
-    <a href="{{ url_for('next_quote') }}">
-        <button>Next Quote</button>
-    </a>
 
     <p>Score: {{ score }}</p>
 </body>

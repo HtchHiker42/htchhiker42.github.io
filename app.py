@@ -27,8 +27,6 @@ def index():
             session["score"] -= 10
             result = f"Wrong! Correct answer: {correct_case}, {correct_use}"
 
-        # Store the result and disable the submit button after submission
-        session["submitted"] = True
         return render_template("index.html",
                                quote=session["quote"]["text"],
                                score=session["score"],
@@ -44,7 +42,6 @@ def index():
 @app.route("/next")
 def next_quote():
     session["quote"] = random.choice(QUOTES)
-    session["submitted"] = False  # Reset submission state for next quote
     return redirect(url_for("index"))
 
 if __name__ == "__main__":
