@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import random
+import os
 from data import QUOTES
 
 app = Flask(__name__)
-app.secret_key = "supersecretkey"
+app.secret_key = "supersecretkey"  # Replace with a stronger secret in production!
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -26,14 +27,24 @@ def index():
             session["score"] -= 10
             result = f"Wrong! Correct answer: {correct_case}, {correct_use}"
 
-        return render_template("index.html", quote=session["quote"]["text"],
-                               score=session["score"], result=result,
+        return render_template("index.html",
+                               quote=session["quote"]["text"],
+                               score=session["score"],
+                               result=result,
                                submitted=True)
 
-    return render_template("index.html", quote=session["quote"]["text"],
-                           score=session["score"], result=None, submitted=False)
+    return render_template("index.html",
+                           quote=session["quote"]["text"],
+                           score=session["score"],
+                           result=None,
+                           submitted=False)
 
 @app.route("/next")
 def next_quote():
     session["quote"] = random.choice(QUOTES)
     return redirect(url_for("index"))
+
+# bind to 0.0.0.0 and render's port
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
