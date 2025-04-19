@@ -5,18 +5,30 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script>
         function disableSubmit() {
-            document.getElementById("submit-btn").disabled = true;
-            document.getElementById("next-btn").style.display = "inline-block";
+            const submitBtn = document.getElementById("submit-btn");
+            if (submitBtn) {
+                submitBtn.disabled = true;
+            }
+            const nextBtn = document.getElementById("next-btn");
+            if (nextBtn) {
+                nextBtn.style.display = "inline-block";
+            }
         }
     </script>
 </head>
 <body>
     <h1>Latin Quiz</h1>
-    <h2>{{ quote }}</h2>
+
+    {% if quote %}
+        <h2>{{ quote }}</h2>
+    {% else %}
+        <h2>Error: No quote loaded</h2>
+    {% endif %}
 
     <form method="POST" onsubmit="disableSubmit()">
         <label for="case">Case:</label>
-        <select name="case" id="case">
+        <select name="case" id="case" required>
+            <option value="">--Choose Case--</option>
             <option value="nominative">Nominative</option>
             <option value="genitive">Genitive</option>
             <option value="dative">Dative</option>
@@ -26,7 +38,8 @@
         </select>
 
         <label for="use">Use:</label>
-        <select name="use" id="use">
+        <select name="use" id="use" required>
+            <option value="">--Choose Use--</option>
             <option value="subject">Subject</option>
             <option value="possession">Possession</option>
             <option value="indirect object">Indirect Object</option>
