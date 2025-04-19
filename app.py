@@ -1,27 +1,39 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, redirect, url_for, session
 import random
-from data import quotes
+from data import QUOTES
 
 app = Flask(__name__)
-score = 0
+app.secret_key = "supersecretkey"
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
-    quote = random.choice(quotes)
-    return render_template("index.html", quote=quote)
+    if "score" not in session:
+        session["score"] = 0
+    if "quote" not in session:
+        session["quote"] = random.choice(QUOTES)
 
-@app.route("/check", methods=["POST"])
-def check():
-    global score
-    data = request.json
-    correct = next(q for q in quotes if q["text"] == data["text"])
-    if data["case"] == correct["case"] and data["use"] == correct["use"]:
-        score += 10
-        result = "correct"
-    else:
-        score -= 10
-        result = "incorrect"
-    return jsonify({"result": result, "score": score})
+    if request.method == "POST":
+        case = request.form.get("case")
+        use = request.form.get("use")
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000)
+        correct_case = session["quote"]["case"]
+        correct_use = session["quote"]["use"]
+
+        if case == correct_case and use == correct_use:
+            session["score"] += 10
+            result = "Correct!"
+        else:
+            session["score"] -= 10
+            result = f"Wrong! Correct answer: {correct_case}, {correct_use}"
+
+        return render_template("index.html", quote=session["quote"]["text"],
+                               score=session["score"], result=result,
+                               submitted=True)
+
+    return render_template("index.html", quote=session["quote"]["text"],
+                           score=session["score"], result=None, submitted=False)
+
+@app.route("/next")
+def next_quote():
+    session["quote"] = random.choice(QUOTES)
+    return redirect(url_for("index"))
