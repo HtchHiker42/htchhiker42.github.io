@@ -1,13 +1,5 @@
-quotes = [
-    {
-        "text": "TU, Veni, vidi, vici.",
-        "case": "nominative",
-        "use": "subject"
-    },
-    {
-        "text": "Carpe DIEM.",
-        "case": "accusative",
-        "use": "direct object"
-    },
-    # Add more here
+QUOTES = [
+    {"text": "Gallia est omnis divisa in partes tres", "case": "nominative", "use": "subject"},
+    {"text": "Veni, vidi, vici", "case": "nominative", "use": "subject"},
+    # Add more quotes!
 ]
