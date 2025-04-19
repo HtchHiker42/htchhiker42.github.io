@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Latin Quote Quiz</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Latin Quote Quiz</h1>
+    <div id="quote">{{ quote.text }}</div>
+
+    <label>Case:</label>
+    <select id="case">
+        <option value="nominative">Nominative</option>
+        <option value="genitive">Genitive</option>
+        <option value="dative">Dative</option>
+        <option value="accusative">Accusative</option>
+        <option value="ablative">Ablative</option>
+        <option value="vocative">Vocative</option>
+    </select>
+
+    <label>Use:</label>
+    <select id="use">
+        <option value="subject">Subject</option>
+        <option value="possessive">Possessive</option>
+        <option value="indirect object">Indirect Object</option>
+        <option value="direct object">Direct Object</option>
+        <option value="means">Means</option>
+        <option value="address">Address</option>
+    </select>
+
+    <button onclick="submitAnswer()">Submit</button>
+
+    <div id="feedback"></div>
+    <div id="score">Score: 0</div>
+
+    <script>
+        const quoteText = document.getElementById("quote").innerText;
+
+        function submitAnswer() {
+            fetch("/check", {
+                method: "POST",
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    text: quoteText,
+                    case: document.getElementById("case").value,
+                    use: document.getElementById("use").value
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("feedback").innerText = data.result === "correct" ? "✅ Correct!" : "❌ Incorrect!";
+                document.getElementById("score").innerText = "Score: " + data.score;
+            });
+        }
+    </script>
+</body>
+</html>
