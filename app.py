@@ -1,10 +1,10 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for, session
 import random
-import os
 from data import QUOTES
 
 app = Flask(__name__)
-app.secret_key = "supersecretkey"  # Replace with a stronger secret in production!
+app.secret_key = "supersecretkey"
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -27,6 +27,8 @@ def index():
             session["score"] -= 10
             result = f"Wrong! Correct answer: {correct_case}, {correct_use}"
 
+        # Store the result and disable the submit button after submission
+        session["submitted"] = True
         return render_template("index.html",
                                quote=session["quote"]["text"],
                                score=session["score"],
@@ -42,9 +44,10 @@ def index():
 @app.route("/next")
 def next_quote():
     session["quote"] = random.choice(QUOTES)
+    session["submitted"] = False  # Reset submission state for next quote
     return redirect(url_for("index"))
 
-# bind to 0.0.0.0 and render's port
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port)
+    # Dynamically use the PORT environment variable if available (for deployment)
+    port = int(os.environ.get("PORT", 5000))  # Default to 5000 for local dev
+    app.run(debug=True, host="0.0.0.0", port=port)

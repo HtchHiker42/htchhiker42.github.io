@@ -2,31 +2,12 @@
 <html>
 <head>
     <title>Latin Quiz</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <!-- Commented out the JavaScript function to disable the submit button -->
-    <!-- <script>
-        function disableSubmit() {
-            const submitBtn = document.getElementById("submit-btn");
-            if (submitBtn) {
-                submitBtn.disabled = true;
-            }
-            const nextBtn = document.getElementById("next-btn");
-            if (nextBtn) {
-                nextBtn.style.display = "inline-block";
-            }
-        }
-    </script> -->
 </head>
 <body>
     <h1>Latin Quiz</h1>
 
-    {% if quote %}
-        <h2>{{ quote }}</h2>
-    {% else %}
-        <h2>Error: No quote loaded</h2>
-    {% endif %}
+    <h2>{{ quote }}</h2>
 
-    <!-- Commented out onsubmit attribute -->
     <form method="POST">
         <label for="case">Case:</label>
         <select name="case" id="case" required>
@@ -50,17 +31,21 @@
             <option value="address">Address</option>
         </select>
 
-        <button type="submit" id="submit-btn">Submit</button>
+        {% if not submitted %}
+            <button type="submit" id="submit-btn">Submit</button>
+        {% else %}
+            <button type="button" disabled>Submit</button>  <!-- Button Disabled after submission -->
+        {% endif %}
     </form>
 
     {% if submitted %}
         <p><strong>{{ result }}</strong></p>
-        <a href="{{ url_for('next_quote') }}">
-            <button id="next-btn">Next Quote</button>
-        </a>
-    {% else %}
-        <button id="next-btn" style="display:none;">Next Quote</button>
     {% endif %}
+
+    <!-- Next button -->
+    <a href="{{ url_for('next_quote') }}">
+        <button>Next Quote</button>
+    </a>
 
     <p>Score: {{ score }}</p>
 </body>
