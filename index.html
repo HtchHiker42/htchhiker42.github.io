@@ -3,7 +3,8 @@
 <head>
     <title>Latin Quiz</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script>
+    <!-- Commented out the JavaScript function to disable the submit button -->
+    <!-- <script>
         function disableSubmit() {
             const submitBtn = document.getElementById("submit-btn");
             if (submitBtn) {
@@ -14,7 +15,7 @@
                 nextBtn.style.display = "inline-block";
             }
         }
-    </script>
+    </script> -->
 </head>
 <body>
     <h1>Latin Quiz</h1>
@@ -25,7 +26,8 @@
         <h2>Error: No quote loaded</h2>
     {% endif %}
 
-    <form method="POST" onsubmit="disableSubmit()">
+    <!-- Commented out onsubmit attribute -->
+    <form method="POST">
         <label for="case">Case:</label>
         <select name="case" id="case" required>
             <option value="">--Choose Case--</option>
