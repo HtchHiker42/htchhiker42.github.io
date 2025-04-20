@@ -20,29 +20,6 @@
     .quiz-area h1 {
       margin: 0;
     }
-
-    /* Add styles for the "Back to Home" button */
-    .mode-btn {
-      background-color: #444;
-      color: white;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      border-radius: 5px;
-      padding: 10px 20px;
-      margin: 10px 0;
-      font-size: 16px;
-      transition: background-color 0.3s ease;
-    }
-
-    .mode-btn:hover {
-      background-color: #666;
-    }
-
-    /* Add margin for the button */
-    .back-to-home-btn {
-      margin-top: 30px;
-    }
   </style>
 </head>
 <body>
@@ -120,10 +97,12 @@
           <button>Next Quote</button>
         </a>
       {% endif %}
-
-      <!-- Add the "Back to Home" button below everything -->
-      <a href="{{ url_for('mode') }}" class="mode-btn back-to-home-btn">Back to Home</a>
     </div>
   </div>
+
+  <!-- Add a 'Back to Home' button -->
+  <a href="{{ url_for('choose_mode') }}">
+    <button class="mode-btn">Back to Home</button>
+  </a>
 </body>
 </html>
