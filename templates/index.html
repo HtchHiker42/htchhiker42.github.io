@@ -1,57 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Latin Quote Quiz</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <title>Latin Quiz</title>
 </head>
 <body>
-    <h1>Latin Quote Quiz</h1>
-    <div id="quote">{{ quote.text }}</div>
+    <h1>Latin Quiz</h1>
 
-    <label>Case:</label>
-    <select id="case">
-        <option value="nominative">Nominative</option>
-        <option value="genitive">Genitive</option>
-        <option value="dative">Dative</option>
-        <option value="accusative">Accusative</option>
-        <option value="ablative">Ablative</option>
-        <option value="vocative">Vocative</option>
-    </select>
+    <h2>{{ quote }}</h2>
 
-    <label>Use:</label>
-    <select id="use">
-        <option value="subject">Subject</option>
-        <option value="possessive">Possessive</option>
-        <option value="indirect object">Indirect Object</option>
-        <option value="direct object">Direct Object</option>
-        <option value="means">Means</option>
-        <option value="address">Address</option>
-    </select>
+    <form method="POST">
+        <label for="case">Case:</label>
+        <select name="case" id="case" required>
+            <option value="">--Choose Case--</option>
+            <option value="nominative">Nominative</option>
+            <option value="genitive">Genitive</option>
+            <option value="dative">Dative</option>
+            <option value="accusative">Accusative</option>
+            <option value="ablative">Ablative</option>
+            <option value="vocative">Vocative</option>
+        </select>
 
-    <button onclick="submitAnswer()">Submit</button>
+        <label for="use">Use:</label>
+        <select name="use" id="use" required>
+            <option value="">--Choose Use--</option>
+            <option value="subject">Subject</option>
+            <option value="possession">Possession</option>
+            <option value="indirect object">Indirect Object</option>
+            <option value="direct object">Direct Object</option>
+            <option value="means">Means</option>
+            <option value="address">Address</option>
+        </select>
 
-    <div id="feedback"></div>
-    <div id="score">Score: 0</div>
+        <button type="submit">Submit</button>
+    </form>
 
-    <script>
-        const quoteText = document.getElementById("quote").innerText;
+    {% if submitted %}
+        <p><strong>{{ result }}</strong></p>
+        <a href="{{ url_for('next_quote') }}">
+            <button>Next Quote</button>
+        </a>
+    {% endif %}
 
-        function submitAnswer() {
-            fetch("/check", {
-                method: "POST",
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    text: quoteText,
-                    case: document.getElementById("case").value,
-                    use: document.getElementById("use").value
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById("feedback").innerText = data.result === "correct" ? "✅ Correct!" : "❌ Incorrect!";
-                document.getElementById("score").innerText = "Score: " + data.score;
-            });
-        }
-    </script>
+    <p>Score: {{ score }}</p>
 </body>
 </html>
