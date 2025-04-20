@@ -53,7 +53,7 @@ def index():
         else:
             session["score"] -= points
             session["incorrect"] += 1
-            result = f"❌ Wrong! Correct answer: {correct_case}, {correct_use[0]}"  # Corrected to display full word
+            result = f"❌ Wrong! Correct answer: {correct_case}, {correct_use}"  # Corrected to display full word
 
         # Render result, but keep the same quote on screen until user clicks Next
         return render_template("index.html",
