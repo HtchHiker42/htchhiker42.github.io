@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Select Cases - Case&Use</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    .case-form {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .case-form h2 {
+      margin-bottom: 20px;
+    }
+
+    .checkbox-group {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.1rem;
+    }
+
+    .submit-btn {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 12px;
+      border: none;
+      background-color: #ccc;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      background-color: #bbb;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 40px;
+    }
+
+    .logo-title img {
+      height: 60px;
+      width: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo-title">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+    <h1><em>Case&Use</em></h1>
+  </div>
+
+  <div class="case-form">
+    <h2>Select which cases to practice:</h2>
+    <form method="POST">
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="cases" value="nominative"> Nominative</label>
+        <label><input type="checkbox" name="cases" value="genitive"> Genitive</label>
+        <label><input type="checkbox" name="cases" value="dative"> Dative</label>
+        <label><input type="checkbox" name="cases" value="accusative"> Accusative</label>
+        <label><input type="checkbox" name="cases" value="ablative"> Ablative</label>
+        <label><input type="checkbox" name="cases" value="vocative"> Vocative</label>
+        <label><input type="checkbox" name="cases" value="locative"> Locative</label>
+      </div>
+      <button type="submit" class="submit-btn">Start Practice</button>
+    </form>
+  </div>
+</body>
+</html>
