@@ -1,18 +1,39 @@
+/* Dark theme styling */
 body {
-    font-family: sans-serif;
+    font-family: "Times New Roman", serif;
+    background-color: #121212;
+    color: #E0E0E0;
     text-align: center;
     padding: 30px;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Roman_fresco_Villa_dei_Misteri_Pompeii_005.jpg/960px-Roman_fresco_Villa_dei_Misteri_Pompeii_005.jpg'); /* Replace with your image URL */
+    background-size: cover;
+    background-position: center;
+}
+
+h1, h2, p {
+    color: #E0E0E0;
+}
+
+select, button {
+    margin: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #555;
+    background-color: #333;
+    color: #E0E0E0;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
 }
 
 #quote {
     font-size: 24px;
     margin-bottom: 20px;
-}
-
-select, button {
-    margin: 10px;
-    padding: 5px;
-    font-size: 16px;
 }
 
 #feedback {
@@ -22,5 +43,27 @@ select, button {
 
 #score {
     margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Profile box styling */
+#profile-box {
+    width: 250px;
+    padding: 20px;
+    border: 2px solid #555;
+    background-color: #333;
+    color: #E0E0E0;
+    margin-bottom: 30px;
+}
+
+#profile-box h2 {
+    margin-top: 0;
+}
+
+#profile-box p {
+    font-size: 18px;
+}
+
+#profile-box span {
     font-weight: bold;
 }
