@@ -89,6 +89,16 @@ def choose_mode():
     session.pop("quote", None)
     return redirect(url_for("index"))
 
+# Add the set_mode route to handle the mode change from links
+@app.route("/set_mode/<mode>")
+def set_mode(mode):
+    session["mode"] = mode
+    session["score"] = 0
+    session["correct"] = 0
+    session["incorrect"] = 0
+    session.pop("quote", None)
+    return redirect(url_for("index"))
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     # Bind to 0.0.0.0 for Render compatibility
