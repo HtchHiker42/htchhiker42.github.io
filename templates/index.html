@@ -21,43 +21,22 @@
       margin: 0;
     }
 
-    button {
-      background-color: #f0f0f0;
-      color: #333;
+    /* Add styles for buttons */
+    .mode-btn {
+      background-color: #4CAF50;
+      color: white;
       border: none;
-      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      border-radius: 5px;
       padding: 10px 20px;
       margin: 10px 0;
-      cursor: pointer;
       font-size: 16px;
+      transition: background-color 0.3s ease;
     }
 
-    button:hover {
-      background-color: #e0e0e0;
-    }
-
-    body {
-      background-image: url('{{ url_for('static', filename='background.jpg') }}');
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-position: center;
-      background-color: rgba(255, 255, 255, 0.8); /* fallback */
-    }
-
-    .container {
-      display: flex;
-      padding: 30px;
-      background-color: rgba(255, 255, 255, 0.8);
-    }
-
-    .profile {
-      width: 200px;
-      padding-right: 20px;
-    }
-
-    .quiz-area {
-      flex: 1;
+    .mode-btn:hover {
+      background-color: #45a049;
     }
   </style>
 </head>
@@ -69,7 +48,6 @@
       <p>My Score</p>
       <h3>Correct: {{ correct }}</h3>
       <h3>Incorrect: {{ incorrect }}</h3>
-      <a href="{{ url_for('mode') }}"><button>Back</button></a>
     </div>
 
     <!-- Quiz Interaction (RIGHT) -->
@@ -137,6 +115,10 @@
           <button>Next Quote</button>
         </a>
       {% endif %}
+
+      <!-- Add this link to allow the user to go back and switch modes -->
+      <a href="{{ url_for('set_mode', mode='novice') }}" class="mode-btn">Switch to Novice Mode</a>
+      <a href="{{ url_for('set_mode', mode='literature') }}" class="mode-btn">Switch to Literature Mode</a>
     </div>
   </div>
 </body>
