@@ -16,25 +16,25 @@ body::before {
     height: 100vh;
     width: 100vw;
     background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Roman_fresco_Villa_dei_Misteri_Pompeii_005.jpg/960px-Roman_fresco_Villa_dei_Misteri_Pompeii_005.jpg') no-repeat center center/cover;
-    opacity: 0.08; /* Faint image */
+    opacity: 0.08;
     z-index: -1;
 }
 
-/* Layout for the main page */
 .container {
     display: flex;
-    justify-content: space-between;
-    padding: 30px;
+    height: 100vh;
 }
 
 /* Profile box styles */
 .profile {
     width: 250px;
     padding: 20px;
-    border: 2px solid #555;
-    border-radius: 10px;
+    border-right: 2px solid #555;
     background-color: rgba(40, 40, 40, 0.8);
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .profile h2 {
@@ -47,10 +47,17 @@ body::before {
     margin: 5px 0;
 }
 
-/* Quiz content */
+/* Quiz content styles */
 .quiz-content {
     flex-grow: 1;
-    margin-left: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quiz-inner {
+    max-width: 600px;
+    text-align: center;
 }
 
 #quote {
