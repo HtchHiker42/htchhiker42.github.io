@@ -118,6 +118,43 @@ def select_cases():
             return "Please select at least one case and a quote set.", 400
     return render_template('select_cases.html')
 
+@app.route('/quiz', methods=['GET', 'POST'])
+def quiz():
+    # Get selected cases and quote set from the session
+    selected_cases = session.get('selected_cases', [])
+    quote_set = session.get('quote_set', 'novice')  # Default to 'novice' if nothing is selected
+
+    # Fetch quotes based on selected cases and quote set
+    if quote_set == 'novice':
+        quotes = NOVICE_QUOTES
+    else:
+        quotes = QUOTES
+
+    # Filter the quotes based on the selected cases
+    filtered_quotes = [quote for quote in quotes if quote['case'] in selected_cases]
+
+    # Pick a random quote for the quiz
+    if filtered_quotes:
+        quote = random.choice(filtered_quotes)
+    else:
+        quote = None  # No quotes to show if no match
+
+    # Handle form submission
+    if request.method == 'POST':
+        case_answer = request.form.get('case')
+        use_answer = request.form.get('use')
+
+        # Check if the answer is correct and return feedback
+        correct_case = quote['case'] == case_answer
+        correct_use = quote['use'] == use_answer
+        result = 'Correct!' if correct_case and correct_use else 'Incorrect'
+
+        # Track score (you can store score in session if necessary)
+        return render_template('quiz.html', quote=quote, result=result)
+
+    # Render the quiz page
+    return render_template('quiz.html', quote=quote)
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     # Bind to 0.0.0.0 for Render compatibility
