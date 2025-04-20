@@ -1,60 +1,54 @@
-import os
 from flask import Flask, render_template, request, redirect, url_for, session
 import random
 from data import QUOTES, NOVICE_QUOTES
 
 app = Flask(__name__)
-app.secret_key = "supersecretkey"
-app.config["SESSION_TYPE"] = "filesystem"
+app.secret_key = 'your_secret_key_here'
 
-from flask_session import Session
-Session(app)
-
-@app.route("/", methods=["GET", "POST"])
+# Route to select mode (novice or literature)
+@app.route('/')
 def index():
-    # initialize
-    session.setdefault("score", 0)
-    session.setdefault("mode", None)
-    session.setdefault("quote", random.choice(NOVICE_QUOTES if session["mode"]=="Novice" else QUOTES))
+    return render_template('index.html')
 
-    if request.method == "POST":
-        case = request.form["case"]
-        use  = request.form["use"]
-        correct_case = session["quote"]["case"]
-        correct_use  = session["quote"]["use"]
+@app.route('/set_mode/<mode>')
+def set_mode(mode):
+    session['mode'] = mode
+    if mode == "novice":
+        session['quote'] = random.choice(NOVICE_QUOTES)
+    else:
+        session['quote'] = random.choice(QUOTES)
+    
+    return redirect(url_for('quiz'))
 
-        points = 10 if session["mode"]=="Novice" else 15
-        if case == correct_case and use in correct_use:
-            session["score"] += points
-            result = "✅ Correct!"
+@app.route('/quiz', methods=['GET', 'POST'])
+def quiz():
+    if 'quote' not in session:
+        return redirect(url_for('index'))
+    
+    quote = session['quote']
+    if request.method == 'POST':
+        selected_case = request.form['case']
+        selected_use = request.form['use']
+        
+        correct_case = quote['case']
+        correct_use = quote['use']
+        
+        if selected_case == correct_case and selected_use in correct_use:
+            result = "Correct!"
         else:
-            session["score"] -= points
-            # show all acceptable uses in the key
-            result = f"❌ Wrong! Correct answer: {correct_case}, {', '.join(correct_use)}"
-
-        return render_template("index.html",
-                               quote=session["quote"]["quote"],
-                               score=session["score"],
-                               result=result,
-                               submitted=True)
-
-    return render_template("index.html",
-                           quote=session["quote"]["quote"],
-                           score=session["score"],
-                           submitted=False)
-
-@app.route("/next")
-def next_quote():
-    session["quote"] = random.choice(NOVICE_QUOTES if session["mode"]=="Novice" else QUOTES)
-    return redirect(url_for("index"))
-
-@app.route("/choose_mode", methods=["POST"])
-def choose_mode():
-    session["mode"] = request.form["mode"]
-    session["score"] = 0
-    # immediately pick a first quote in that mode
-    session["quote"] = random.choice(NOVICE_QUOTES if session["mode"]=="Novice" else QUOTES)
-    return redirect(url_for("index"))
+            result = f"Incorrect. The correct case is {correct_case} and the use is {', '.join(correct_use)}."
+        
+        session['correct'] = session.get('correct', 0) + (1 if selected_case == correct_case and selected_use in correct_use else 0)
+        session['incorrect'] = session.get('incorrect', 0) + (0 if selected_case == correct_case and selected_use in correct_use else 1)
+        session['result'] = result
+        
+        # Select a new quote for the next round
+        if session['mode'] == "novice":
+            session['quote'] = random.choice(NOVICE_QUOTES)
+        else:
+            session['quote'] = random.choice(QUOTES)
+    
+    return render_template('quiz.html', quote=quote, result=session.get('result', ''), score=session.get('correct', 0), correct=session.get('correct', 0), incorrect=session.get('incorrect', 0))
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
