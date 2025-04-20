@@ -104,7 +104,6 @@ def mode():
     # This route renders the mode selection page
     return render_template("mode.html")
 
-
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     # Bind to 0.0.0.0 for Render compatibility
