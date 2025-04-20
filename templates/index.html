@@ -3,12 +3,6 @@
 <head>
     <title>Case&Use</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <style>
-        select {
-            max-height: 150px;
-            overflow-y: auto;
-        }
-    </style>
 </head>
 <body>
     <h1>Case&Use</h1>
@@ -29,7 +23,7 @@
         </select>
 
         <label for="use">Use:</label>
-        <select name="use" id="use" required size="6" style="width: 300px;">
+        <select name="use" id="use" required>
             <option value="">--Choose Use--</option>
             <option value="subject">Subject</option>
             <option value="possession">Possession</option>
