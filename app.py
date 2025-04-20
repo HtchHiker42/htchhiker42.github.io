@@ -108,52 +108,64 @@ def mode():
 def select_cases():
     if request.method == 'POST':
         selected_cases = request.form.getlist('cases')
-        quote_set = request.form.get('quote_set')
-        if selected_cases and quote_set:
-            session['selected_cases'] = selected_cases
-            session['quote_set'] = quote_set
-            session['mode'] = 'selected'  # So your quiz logic knows to use this filter
-            return redirect(url_for('quiz'))
-        else:
-            return "Please select at least one case and a quote set.", 400
+        selected_set = request.form.get('quote_set')
+
+        if not selected_cases or not selected_set:
+            return redirect(url_for('select_cases'))
+
+        # Choose the quote set
+        all_quotes = NOVICE_QUOTES if selected_set == 'novice' else QUOTES
+
+        # Filter quotes matching selected cases
+        filtered_quotes = [q for q in all_quotes if q['case'] in selected_cases]
+
+        session['selected_quotes'] = filtered_quotes
+        session['mode'] = 'selected'
+        session['score'] = 0
+        session['correct'] = 0
+        session['incorrect'] = 0
+        session['points'] = 10 if selected_set == 'novice' else 15
+
+        return redirect(url_for('quiz'))
+
     return render_template('select_cases.html')
 
 @app.route('/quiz', methods=['GET', 'POST'])
 def quiz():
-    # Get selected cases and quote set from the session
-    selected_cases = session.get('selected_cases', [])
-    quote_set = session.get('quote_set', 'novice')  # Default to 'novice' if nothing is selected
+    if 'selected_quotes' not in session or not session['selected_quotes']:
+        return redirect(url_for('select_cases'))  # Fallback if session expired
 
-    # Fetch quotes based on selected cases and quote set
-    if quote_set == 'novice':
-        quotes = NOVICE_QUOTES
-    else:
-        quotes = QUOTES
-
-    # Filter the quotes based on the selected cases
-    filtered_quotes = [quote for quote in quotes if quote['case'] in selected_cases]
-
-    # Pick a random quote for the quiz
-    if filtered_quotes:
-        quote = random.choice(filtered_quotes)
-    else:
-        quote = None  # No quotes to show if no match
-
-    # Handle form submission
     if request.method == 'POST':
-        case_answer = request.form.get('case')
-        use_answer = request.form.get('use')
+        selected_case = request.form.get('case')
+        selected_use = request.form.get('use')
+        correct_case = session.get('current_case')
+        correct_use = session.get('current_use')
 
-        # Check if the answer is correct and return feedback
-        correct_case = quote['case'] == case_answer
-        correct_use = quote['use'] == use_answer
-        result = 'Correct!' if correct_case and correct_use else 'Incorrect'
+        submitted = True
+        if selected_case == correct_case and selected_use == correct_use:
+            session['score'] += session.get('points', 10)
+            session['correct'] += 1
+            result = "Correct!"
+        else:
+            session['incorrect'] += 1
+            result = f"Incorrect. Correct answer: {correct_case.title()}, {correct_use.title()}"
+    else:
+        submitted = False
+        result = ""
 
-        # Track score (you can store score in session if necessary)
-        return render_template('quiz.html', quote=quote, result=result)
+    # Pick a new quote
+    quote_data = random.choice(session['selected_quotes'])
+    session['current_case'] = quote_data['case']
+    session['current_use'] = quote_data['use']
+    quote = quote_data['quote']
 
-    # Render the quiz page
-    return render_template('quiz.html', quote=quote)
+    return render_template('quiz.html',
+                           quote=quote,
+                           submitted=submitted,
+                           result=result,
+                           score=session.get('score', 0),
+                           correct=session.get('correct', 0),
+                           incorrect=session.get('incorrect', 0))
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))

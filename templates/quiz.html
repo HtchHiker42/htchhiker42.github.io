@@ -21,8 +21,6 @@
     .quiz-area h1 {
       margin: 0;
     }
-
-    /* Customize quiz-specific styling if needed */
   </style>
 </head>
 <body>
@@ -44,8 +42,8 @@
 
       <!-- Displaying the Quote -->
       {% if quote %}
-        <h2>{{ quote.text }}</h2>  <!-- This assumes you have a 'text' attribute in your quote object -->
-        
+        <h2>{{ quote }}</h2>
+
         <!-- Quiz form for user input -->
         <form method="POST">
           <label for="case">Case:</label>
@@ -101,10 +99,10 @@
         </form>
 
         {% if submitted %}
-          <p><strong>{{ result }}</strong></p> <!-- Result of the quiz -->
-          <a href="{{ url_for('next_quote') }}">
-            <button>Next Quote</button>
-          </a>
+          <p><strong>{{ result }}</strong></p>
+          <form method="GET">
+            <button type="submit">Next Quote</button>
+          </form>
         {% endif %}
       {% else %}
         <p>No quote available for this selection.</p>
