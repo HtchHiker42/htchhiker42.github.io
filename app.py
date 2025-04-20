@@ -5,66 +5,55 @@ from data import QUOTES, NOVICE_QUOTES
 
 app = Flask(__name__)
 app.secret_key = "supersecretkey"
+app.config["SESSION_TYPE"] = "filesystem"
+
+from flask_session import Session
+Session(app)
 
 @app.route("/", methods=["GET", "POST"])
-def mode_selection():
-    return render_template("mode.html")
-
-@app.route("/set_mode/<mode>")
-def set_mode(mode):
-    session["mode"] = mode
-    session["score"] = 0
-    session["correct"] = 0
-    session["incorrect"] = 0
-    session["quote"] = get_random_quote()
-    return redirect(url_for("index"))
-
-def get_random_quote():
-    if session.get("mode") == "novice":
-        return random.choice(NOVICE_QUOTES)
-    else:
-        return random.choice(QUOTES)
-
-@app.route("/quiz", methods=["GET", "POST"])
 def index():
-    if "mode" not in session:
-        return redirect(url_for("mode_selection"))
+    # initialize
+    session.setdefault("score", 0)
+    session.setdefault("mode", None)
+    session.setdefault("quote", random.choice(NOVICE_QUOTES if session["mode"]=="Novice" else QUOTES))
 
     if request.method == "POST":
-        case = request.form.get("case")
-        use = request.form.get("use")
-
+        case = request.form["case"]
+        use  = request.form["use"]
         correct_case = session["quote"]["case"]
-        correct_use = session["quote"]["use"]
+        correct_use  = session["quote"]["use"]
 
-        if case == correct_case and use == correct_use:
+        points = 10 if session["mode"]=="Novice" else 15
+        if case == correct_case and use in correct_use:
+            session["score"] += points
             result = "✅ Correct!"
-            session["correct"] += 1
-            session["score"] += 10 if session["mode"] == "novice" else 15
         else:
-            result = f"❌ Wrong! Correct answer: {correct_case}, {correct_use}"
-            session["incorrect"] += 1
-            session["score"] -= 10 if session["mode"] == "novice" else 15
+            session["score"] -= points
+            # show all acceptable uses in the key
+            result = f"❌ Wrong! Correct answer: {correct_case}, {', '.join(correct_use)}"
 
         return render_template("index.html",
-                               quote=session["quote"]["text"],
+                               quote=session["quote"]["quote"],
                                score=session["score"],
-                               correct=session["correct"],
-                               incorrect=session["incorrect"],
                                result=result,
                                submitted=True)
 
     return render_template("index.html",
-                           quote=session["quote"]["text"],
+                           quote=session["quote"]["quote"],
                            score=session["score"],
-                           correct=session["correct"],
-                           incorrect=session["incorrect"],
-                           result=None,
                            submitted=False)
 
 @app.route("/next")
 def next_quote():
-    session["quote"] = get_random_quote()
+    session["quote"] = random.choice(NOVICE_QUOTES if session["mode"]=="Novice" else QUOTES)
+    return redirect(url_for("index"))
+
+@app.route("/choose_mode", methods=["POST"])
+def choose_mode():
+    session["mode"] = request.form["mode"]
+    session["score"] = 0
+    # immediately pick a first quote in that mode
+    session["quote"] = random.choice(NOVICE_QUOTES if session["mode"]=="Novice" else QUOTES)
     return redirect(url_for("index"))
 
 if __name__ == "__main__":
