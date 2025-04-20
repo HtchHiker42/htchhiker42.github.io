@@ -8,11 +8,17 @@ app.secret_key = "supersecretkey"
 
 @app.route("/", methods=["GET", "POST"])
 def index():
+    # Initialize score and user data if not already in session
     if "score" not in session:
         session["score"] = 0
+    if "correct" not in session:
+        session["correct"] = 0
+    if "incorrect" not in session:
+        session["incorrect"] = 0
     if "quote" not in session:
         session["quote"] = random.choice(QUOTES)
 
+    # Handling form submission for the quiz
     if request.method == "POST":
         case = request.form.get("case")
         use = request.form.get("use")
@@ -22,26 +28,28 @@ def index():
 
         if case == correct_case and use == correct_use:
             session["score"] += 10
-            result = "Correct!"
-            is_correct = True
+            session["correct"] += 1
+            result = "✅ Correct!"
         else:
             session["score"] -= 10
-            result = f"Wrong! Correct answer: {correct_case}, {correct_use}"
-            is_correct = False
+            session["incorrect"] += 1
+            result = f"❌ Wrong! Correct answer: {correct_case}, {correct_use}"
 
         return render_template("index.html",
                                quote=session["quote"]["text"],
                                score=session["score"],
+                               correct=session["correct"],
+                               incorrect=session["incorrect"],
                                result=result,
-                               submitted=True,
-                               is_correct=is_correct)
+                               submitted=True)
 
     return render_template("index.html",
                            quote=session["quote"]["text"],
                            score=session["score"],
+                           correct=session["correct"],
+                           incorrect=session["incorrect"],
                            result=None,
-                           submitted=False,
-                           is_correct=None)
+                           submitted=False)
 
 @app.route("/next")
 def next_quote():
@@ -49,5 +57,6 @@ def next_quote():
     return redirect(url_for("index"))
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
+    # Dynamically use the PORT environment variable if available (for deployment)
+    port = int(os.environ.get("PORT", 5000))  # Default to 5000 for local dev
     app.run(debug=True, host="0.0.0.0", port=port)
