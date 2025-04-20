@@ -13,7 +13,7 @@
 
         .mode-selection {
             text-align: center;
-            padding-top: 50px;
+            padding-top: 30px;
         }
 
         .logo-title {
@@ -21,12 +21,17 @@
             align-items: center;
             justify-content: center;
             gap: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
         }
 
         .logo-title img {
             height: 60px;
             width: auto;
+        }
+
+        .instruction {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
         }
     </style>
 </head>
@@ -36,6 +41,12 @@
             <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
             <h1><em>Case&Use</em></h1>
         </div>
+
+        <!-- Instructional text -->
+        <p class="instruction">
+            Identify the case and use of the <strong>CAPITALIZED</strong> noun.
+        </p>
+
         <h2>Select a Mode:</h2>
         <a href="{{ url_for('set_mode', mode='novice') }}">
             <button class="mode-btn">Novice – 10 points each</button>
