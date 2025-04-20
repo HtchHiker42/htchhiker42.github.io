@@ -1,71 +1,56 @@
-/* Dark theme styling */
 body {
     font-family: "Times New Roman", serif;
-    background-color: #121212;
+    margin: 0;
+    padding: 0;
     color: #E0E0E0;
-    text-align: center;
-    padding: 30px;
+    background-color: #121212;
     position: relative;
-    overflow: hidden;
+    min-height: 100vh;
 }
 
-/* Background image container */
 body::before {
-    content: '';
-    position: absolute;
+    content: "";
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Roman_fresco_Villa_dei_Misteri_Pompeii_005.jpg/960px-Roman_fresco_Villa_dei_Misteri_Pompeii_005.jpg'); /* Replace with your image URL */
-    background-size: cover;
-    background-position: center;
-    opacity: 0.3; /* Darken the image */
-    z-index: -1; /* Make sure the image is behind all content */
+    height: 100vh;
+    width: 100vw;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Roman_fresco_Villa_dei_Misteri_Pompeii_005.jpg/960px-Roman_fresco_Villa_dei_Misteri_Pompeii_005.jpg') no-repeat center center/cover;
+    opacity: 0.08; /* Faint image */
+    z-index: -1;
 }
 
-/* Profile box styling */
-#profile-box {
+/* Layout for the main page */
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+}
+
+/* Profile box styles */
+.profile {
     width: 250px;
     padding: 20px;
     border: 2px solid #555;
-    background-color: #333;
-    color: #E0E0E0;
-    margin-bottom: 30px;
+    border-radius: 10px;
+    background-color: rgba(40, 40, 40, 0.8);
+    text-align: center;
 }
 
-#profile-box h2 {
-    margin-top: 0;
+.profile h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
 }
 
-#profile-box p {
+.profile p {
     font-size: 18px;
+    margin: 5px 0;
 }
 
-#profile-box span {
-    font-weight: bold;
-}
-
-/* Other styles for dark theme and interactive elements */
-h1, h2, p {
-    color: #E0E0E0;
-}
-
-select, button {
-    margin: 10px;
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid #555;
-    background-color: #333;
-    color: #E0E0E0;
-}
-
-button {
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #555;
+/* Quiz content */
+.quiz-content {
+    flex-grow: 1;
+    margin-left: 40px;
 }
 
 #quote {
@@ -73,12 +58,27 @@ button:hover {
     margin-bottom: 20px;
 }
 
+select, button {
+    margin: 10px;
+    padding: 8px;
+    font-size: 16px;
+    background-color: #222;
+    color: #E0E0E0;
+    border: 1px solid #555;
+    border-radius: 5px;
+}
+
+select:focus, button:hover {
+    outline: none;
+    background-color: #333;
+}
+
 #feedback {
     font-size: 20px;
     margin-top: 20px;
 }
 
-#score {
-    margin-top: 10px;
-    font-weight: bold;
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
