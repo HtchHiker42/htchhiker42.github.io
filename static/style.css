@@ -2,121 +2,70 @@ body {
     font-family: "Times New Roman", serif;
     margin: 0;
     padding: 0;
-    color: #E0E0E0;
     background-color: #121212;
-    position: relative;
-    min-height: 100vh;
-}
-
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
+    color: #E0E0E0;
     height: 100vh;
-    width: 100vw;
-    background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Roman_fresco_Villa_dei_Misteri_Pompeii_005.jpg/960px-Roman_fresco_Villa_dei_Misteri_Pompeii_005.jpg') no-repeat center center/cover;
-    opacity: 0.08;
-    z-index: -1;
-}
-
-.container {
+    overflow: hidden;
+  }
+  
+  /* TWO‑COLUMN WRAPPER */
+  .container {
     display: flex;
-    height: 100vh;
-}
-
-/* Profile box styles */
-.profile {
-    width: 250px;
+    height: 100vh;               /* fill viewport */
+    padding: 30px;
+  }
+  
+  /* PROFILE BOX ON LEFT */
+  .profile {
+    width: 220px;
+    border: 2px solid #555;
+    border-radius: 8px;
+    background-color: rgba(40,40,40,0.8);
     padding: 20px;
-    border-right: 2px solid #555;
-    background-color: rgba(40, 40, 40, 0.8);
+    text-align: center;
+    margin-right: 40px;
+    /* keep it top‑aligned */
+    align-self: flex-start;
+  }
+  
+  /* QUIZ AREA ON RIGHT */
+  .quiz-area {
+    flex: 1;
+    max-width: 700px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.profile h2 {
-    font-size: 32px;
-    margin-bottom: 10px;
-}
-
-.profile p {
-    font-size: 18px;
-    margin: 5px 0;
-}
-
-/* Quiz content styles */
-.quiz-content {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.quiz-inner {
-    max-width: 600px;
+    justify-content: center;  /* vertical centering */
+    align-items: center;      /* horizontal centering */
     text-align: center;
-}
-
-#quote {
+  }
+  
+  .quiz-area h1 {
+    margin-top: 0;
+  }
+  
+  #quote {
     font-size: 24px;
     margin-bottom: 20px;
-}
-
-select, button {
-    margin: 10px;
-    padding: 8px;
+  }
+  
+  select, button {
+    margin: 8px 0;
+    padding: 6px 10px;
     font-size: 16px;
     background-color: #222;
     color: #E0E0E0;
     border: 1px solid #555;
-    border-radius: 5px;
-}
-
-select:focus, button:hover {
-    outline: none;
+    border-radius: 4px;
+    width: auto;
+    min-width: 200px;
+  }
+  
+  button:hover {
     background-color: #333;
-}
-
-#feedback {
-    font-size: 20px;
+  }
+  
+  #feedback {
     margin-top: 20px;
-}
-
-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.mode-selection {
-    text-align: center;
-    margin-top: 100px;
-}
-
-.mode-selection h1 {
-    font-size: 48px;
-    color: #fff;
-}
-
-.mode-selection h2 {
-    font-size: 28px;
-    color: #ccc;
-}
-
-.mode-btn {
     font-size: 20px;
-    padding: 10px 20px;
-    margin: 20px;
-    cursor: pointer;
-    background-color: #444;
-    color: #fff;
-    border: 2px solid #777;
-    border-radius: 10px;
-    transition: background-color 0.3s;
-}
-
-.mode-btn:hover {
-    background-color: #666;
-}
+    font-weight: bold;
+  }  
