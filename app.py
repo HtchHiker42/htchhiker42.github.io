@@ -104,8 +104,18 @@ def mode():
     # This route renders the mode selection page
     return render_template("mode.html")
 
-@app.route('/select_cases')
+@app.route('/select_cases', methods=['GET', 'POST'])
 def select_cases():
+    if request.method == 'POST':
+        selected_cases = request.form.getlist('cases')
+        quote_set = request.form.get('quote_set')
+        if selected_cases and quote_set:
+            session['selected_cases'] = selected_cases
+            session['quote_set'] = quote_set
+            session['mode'] = 'selected'  # So your quiz logic knows to use this filter
+            return redirect(url_for('quiz'))
+        else:
+            return "Please select at least one case and a quote set.", 400
     return render_template('select_cases.html')
 
 if __name__ == "__main__":

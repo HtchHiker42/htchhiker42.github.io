@@ -64,6 +64,14 @@
   <div class="case-form">
     <h2>Select which cases to practice:</h2>
     <form method="POST">
+      <label for="quote_set">Select Quote Set:</label>
+      <select id="quote_set" name="quote_set" required>
+        <option value="">--Choose Set--</option>
+        <option value="novice">Novice</option>
+        <option value="literature">Literature</option>
+      </select>
+      <br><br>
+
       <div class="checkbox-group">
         <label><input type="checkbox" name="cases" value="nominative"> Nominative</label>
         <label><input type="checkbox" name="cases" value="genitive"> Genitive</label>
