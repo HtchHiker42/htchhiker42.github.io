@@ -89,3 +89,34 @@ button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
 }
+
+.mode-selection {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.mode-selection h1 {
+    font-size: 48px;
+    color: #fff;
+}
+
+.mode-selection h2 {
+    font-size: 28px;
+    color: #ccc;
+}
+
+.mode-btn {
+    font-size: 20px;
+    padding: 10px 20px;
+    margin: 20px;
+    cursor: pointer;
+    background-color: #444;
+    color: #fff;
+    border: 2px solid #777;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+}
+
+.mode-btn:hover {
+    background-color: #666;
+}

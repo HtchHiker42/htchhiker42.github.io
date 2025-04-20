@@ -6,8 +6,18 @@
 </head>
 <body>
     <div class="container">
+        <!-- Mode Selection -->
+        {% if not session['mode'] %}
+        <div class="mode-selection">
+            <form method="POST" action="{{ url_for('choose_mode') }}">
+                <button type="submit" name="mode" value="Novice">Novice - 10 points each</button>
+                <button type="submit" name="mode" value="Literature">Literature - 15 points each</button>
+            </form>
+        </div>
+        {% endif %}
+
         <!-- User Profile (LEFT) -->
-        <div class="profile">
+        <div class="profile-box">
             <h2>{{ score }}</h2>
             <p>My Score</p>
             <h3>Correct: {{ correct }}</h3>
@@ -15,67 +25,65 @@
         </div>
 
         <!-- Quiz Interaction (RIGHT) -->
-        <div class="quiz-content">
-            <div class="quiz-inner">
-                <h1>Case&Use</h1>
-                <h2 id="quote">{{ quote }}</h2>
+        <div class="quiz-area">
+            <h1>Case&Use</h1>
+            <h2 id="quote">{{ quote }}</h2>
 
-                <form method="POST">
-                    <label for="case">Case:</label>
-                    <select name="case" id="case" required>
-                        <option value="">--Choose Case--</option>
-                        <option value="nominative">Nominative</option>
-                        <option value="genitive">Genitive</option>
-                        <option value="dative">Dative</option>
-                        <option value="accusative">Accusative</option>
-                        <option value="ablative">Ablative</option>
-                        <option value="vocative">Vocative</option>
-                        <option value="locative">Locative</option>
-                    </select>
+            <form method="POST">
+                <label for="case">Case:</label>
+                <select name="case" id="case" required>
+                    <option value="">--Choose Case--</option>
+                    <option value="nominative">Nominative</option>
+                    <option value="genitive">Genitive</option>
+                    <option value="dative">Dative</option>
+                    <option value="accusative">Accusative</option>
+                    <option value="ablative">Ablative</option>
+                    <option value="vocative">Vocative</option>
+                    <option value="locative">Locative</option>
+                </select>
 
-                    <label for="use">Use:</label>
-                    <select name="use" id="use" required>
-                        <option value="">--Choose Use--</option>
-                        <option value="subject">Subject</option>
-                        <option value="possession">Possession</option>
-                        <option value="indirect object">Indirect Object</option>
-                        <option value="direct object">Direct Object</option>
-                        <option value="means">Means</option>
-                        <option value="address">Address</option>
-                        <option value="partitive">Partitive</option>
-                        <option value="cause">Cause</option>
-                        <option value="degree of difference">Degree of Difference</option>
-                        <option value="place where">Place Where</option>
-                        <option value="place from which">Place From Which</option>
-                        <option value="place to which">Place To Which</option>
-                        <option value="separation">Separation</option>
-                        <option value="absolute">Absolute</option>
-                        <option value="time within which">Time Within Which</option>
-                        <option value="time when">Time When</option>
-                        <option value="extent of time">Extent of Time</option>
-                        <option value="extent of space">Extent of Space</option>
-                        <option value="reference">Reference</option>
-                        <option value="objective">Objective</option>
-                        <option value="with special preposition">With Special Preposition</option>
-                        <option value="with special verbs">With Special Verbs</option>
-                        <option value="with the adjective">With the Adjective</option>
-                        <option value="apposition">Apposition</option>
-                        <option value="adverbial">Adverbial</option>
-                        <option value="purpose">Purpose</option>
-                        <option value="agent">Agent</option>
-                        <option value="predicate">Predicate</option>
-                    </select>
+                <label for="use">Use:</label>
+                <select name="use" id="use" required>
+                    <option value="">--Choose Use--</option>
+                    <option value="subject">Subject</option>
+                    <option value="possession">Possession</option>
+                    <option value="indirect object">Indirect Object</option>
+                    <option value="direct object">Direct Object</option>
+                    <option value="means">Means</option>
+                    <option value="address">Address</option>
+                    <option value="partitive">Partitive</option>
+                    <option value="cause">Cause</option>
+                    <option value="degree of difference">Degree of Difference</option>
+                    <option value="place where">Place Where</option>
+                    <option value="place from which">Place From Which</option>
+                    <option value="place to which">Place To Which</option>
+                    <option value="separation">Separation</option>
+                    <option value="absolute">Absolute</option>
+                    <option value="time within which">Time Within Which</option>
+                    <option value="time when">Time When</option>
+                    <option value="extent of time">Extent of Time</option>
+                    <option value="extent of space">Extent of Space</option>
+                    <option value="reference">Reference</option>
+                    <option value="objective">Objective</option>
+                    <option value="with special preposition">With Special Preposition</option>
+                    <option value="with special verbs">With Special Verbs</option>
+                    <option value="with the adjective">With the Adjective</option>
+                    <option value="apposition">Apposition</option>
+                    <option value="adverbial">Adverbial</option>
+                    <option value="purpose">Purpose</option>
+                    <option value="agent">Agent</option>
+                    <option value="predicate">Predicate</option>
+                </select>
 
-                    <button type="submit">Submit</button>
-                </form>
+                <button type="submit">Submit</button>
+            </form>
 
-                {% if submitted %}
-                    <p id="feedback"><strong>{{ result }}</strong></p>
-                    <a href="{{ url_for('next_quote') }}">
-                        <button>Next Quote</button>
-                    </a>
-                {% endif %}
-            </div>
+            {% if submitted %}
+                <p id="feedback"><strong>{{ result }}</strong></p>
+                <a href="{{ url_for('next_quote') }}">
+                    <button>Next Quote</button>
+                </a>
+            {% endif %}
         </div>
     </div>
 </body>
