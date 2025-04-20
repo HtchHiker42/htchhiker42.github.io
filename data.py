@@ -198,9 +198,9 @@ QUOTES = [
 
 
 NOVICE_QUOTES = [
-    {"quote": "Puella aquam portat",                    "case": "accusative", "use": ["direct object"]},
-    {"quote": "Magister puero librum dat",            "case": "dative",     "use": ["indirect object"]},
-    {"quote": "Romani in Italia habitant",            "case": "ablative",    "use": ["place where"]},
-    {"quote": "Puer amicum vocat",                    "case": "accusative", "use": ["direct object"]},
-    {"quote": "Amicus PUELLAE librum dat",            "case": "genitive",    "use": ["possession"]}
+    {"quote": "Puella aquam portat", "case": "accusative", "use": "direct object"},
+    {"quote": "Magister puero librum dat", "case": "dative", "use": "indirect object"},
+    {"quote": "Romani in Italia habitant", "case": "ablative", "use": "place where"},
+    {"quote": "Puer amicum vocat", "case": "accusative", "use": "direct object"},
+    {"quote": "Amicus PUELLAE librum dat", "case": "genitive", "use": "possession"}
 ]
