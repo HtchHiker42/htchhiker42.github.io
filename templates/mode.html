@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Mode - Case&Use</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="mode-selection">
+        <h1>Welcome to <em>Case&Use</em></h1>
+        <h2>Select a Mode:</h2>
+        <a href="{{ url_for('set_mode', mode='novice') }}"><button class="mode-btn">Novice – 10 points each</button></a>
+        <a href="{{ url_for('set_mode', mode='literature') }}"><button class="mode-btn">Literature – 15 points each</button></a>
+    </div>
+</body>
+</html>
