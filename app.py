@@ -53,7 +53,7 @@ def index():
         else:
             session["score"] -= points
             session["incorrect"] += 1
-            result = f"❌ Wrong! Correct answer: {correct_case}, {', '.join(correct_use)}"
+            result = f"❌ Wrong! Correct answer: {correct_case}, {correct_use[0]}"  # Corrected to display full word
 
         # Render result, but keep the same quote on screen until user clicks Next
         return render_template("index.html",
@@ -89,9 +89,9 @@ def choose_mode():
     session.pop("quote", None)
     return redirect(url_for("index"))
 
-# Add the set_mode route to handle the mode change from links
 @app.route("/set_mode/<mode>")
 def set_mode(mode):
+    # Set mode to 'novice' or 'literature'
     session["mode"] = mode
     session["score"] = 0
     session["correct"] = 0
