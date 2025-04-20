@@ -28,28 +28,6 @@
             height: 60px;
             width: auto;
         }
-
-        .mode-btn {
-            font-size: 18px;
-            padding: 12px 24px;
-            margin: 10px;
-            cursor: pointer;
-        }
-
-        /* Button styles */
-        .mode-btn {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .mode-btn:hover {
-            background-color: #45a049;
-        }
     </style>
 </head>
 <body>
@@ -65,9 +43,9 @@
         <a href="{{ url_for('set_mode', mode='literature') }}">
             <button class="mode-btn">Literature – 15 points each</button>
         </a>
-
-        <!-- Add this button/link to allow the user to go back -->
-        <a href="{{ url_for('index') }}" class="mode-btn">Back to Quiz</a>
+        <a href="{{ url_for('index') }}">
+            <button class="mode-btn">Back to Quiz</button>
+        </a>
     </div>
 </body>
 </html>

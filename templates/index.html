@@ -20,24 +20,6 @@
     .quiz-area h1 {
       margin: 0;
     }
-
-    /* Add styles for buttons */
-    .mode-btn {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      border-radius: 5px;
-      padding: 10px 20px;
-      margin: 10px 0;
-      font-size: 16px;
-      transition: background-color 0.3s ease;
-    }
-
-    .mode-btn:hover {
-      background-color: #45a049;
-    }
   </style>
 </head>
 <body>
@@ -115,10 +97,6 @@
           <button>Next Quote</button>
         </a>
       {% endif %}
-
-      <!-- Add this link to allow the user to go back and switch modes -->
-      <a href="{{ url_for('set_mode', mode='novice') }}" class="mode-btn">Switch to Novice Mode</a>
-      <a href="{{ url_for('set_mode', mode='literature') }}" class="mode-btn">Switch to Literature Mode</a>
     </div>
   </div>
 </body>
