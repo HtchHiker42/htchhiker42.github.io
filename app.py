@@ -23,21 +23,25 @@ def index():
         if case == correct_case and use == correct_use:
             session["score"] += 10
             result = "Correct!"
+            is_correct = True
         else:
             session["score"] -= 10
             result = f"Wrong! Correct answer: {correct_case}, {correct_use}"
+            is_correct = False
 
         return render_template("index.html",
                                quote=session["quote"]["text"],
                                score=session["score"],
                                result=result,
-                               submitted=True)
+                               submitted=True,
+                               is_correct=is_correct)
 
     return render_template("index.html",
                            quote=session["quote"]["text"],
                            score=session["score"],
                            result=None,
-                           submitted=False)
+                           submitted=False,
+                           is_correct=None)
 
 @app.route("/next")
 def next_quote():
@@ -45,6 +49,5 @@ def next_quote():
     return redirect(url_for("index"))
 
 if __name__ == "__main__":
-    # Dynamically use the PORT environment variable if available (for deployment)
-    port = int(os.environ.get("PORT", 5000))  # Default to 5000 for local dev
+    port = int(os.environ.get("PORT", 5000))
     app.run(debug=True, host="0.0.0.0", port=port)

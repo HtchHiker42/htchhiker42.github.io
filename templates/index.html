@@ -55,12 +55,14 @@
             <option value="predicate">Predicate</option>
         </select>
 
-        <button type="submit">Submit</button>
+        {% if not submitted %}
+            <button type="submit">Submit</button>
+        {% endif %}
     </form>
 
     {% if submitted %}
         <p><strong>
-            {% if "Correct" in result %}
+            {% if is_correct %}
                 ✅ {{ result }}
             {% else %}
                 ❌ {{ result }}
