@@ -1,43 +1,199 @@
 QUOTES = [
-    {"text": "Gallia est omnis divisa in partes tres, QUARUM unam incolunt Belgae", "case": "genitive", "use": "partitive"},
-    {"text": "HIS REBUS adducti et auctoritate Orgetorigis permoti constituerunt ea quae ad proficiscendum pertinerent comparare", "case": "ablative", "use": "means"},
-    {"text": "Post eius mortem NIHILO minus Helvetii id quod constituerant facere conantur, ut e finibus suis exeant", "case": "ablative", "use": "degree of difference"},
-    {"text": "Erant omnino itinera duo, QUIBUS ITINERIBUS domo exire possent", "case": "ablative", "use": "means"},
-    {"text": "Maturat ab URBE proficisci et quam maximis potest itineribus in Galliam ulteriorem contendit", "case": "ablative", "use": "place from which"},
-    {"text": "At barbari, CONSILIO Romanorum COGNITO praemisso equitatu et essedariis, quo plerumque genere in proeliis uti consuerunt, reliquis copiis subsecuti nostros navibus egredi prohibebant.", "case": "ablative", "use": "absolute"},
-    {"text": "Ita UNO TEMPORE omnia accidunt.", "case": "ablative", "use": "time within which"},
-    {"text": "MIHI Delphica tellus et Claros et Tenedos Patareaque regia servit", "case": "dative", "use": "reference"},
-    {"text": "Amor est mihi causa SEQUENDI!", "case": "genitive", "use": "objective"},
-    {"text": "Delius hunc nuper, VICTA SERPENTE superbus, viderat.", "case": "ablative", "use": "absolute"},
-    {"text": "Delius hunc nuper, victa serpente SUPERBUS, viderat.", "case": "nominative", "use": "apposition"},
-    {"text": "Dixit, ‘VIRGINITATE frui! dedit hoc pater ante Dianae.’", "case": "ablative", "use": "special verbs"},
-    {"text": "ATHENIS genitor omnia omnibus fecit.", "case": "locative", "use": "place where"},
-    {"text": "Ecce amīcus AVUNCULI quī nūper ad eum ex Hispāniā vēnerat", "case": "genitive", "use": "possession"},
-    {"text": "Ecce amīcus avunculī quī nūper ad eum ex HISPANIA vēnerat", "case": "ablative", "use": "place from which"},
-    {"text": "Tum vērō īdem ille ex Hispāniā amīcus ACRIUS et īnstantius vocavit.", "case": "accusative", "use": "adverbial"},
-    {"text": "Respondimus nōn COMMISUROS NOS ut dē salūte illīus incertī nostrae cōnsulerēmus.", "case": "accusative", "use": "subject of the infinitive"},
-    {"text": "Nec MULTO post illa nūbēs dēscendere in terrās", "case": "ablative", "use": "degree of difference"},
-    {"text": "Nec multō post illa nūbēs dēscendere in TERRAS", "case": "accusative", "use": "place to which"},
-    {"text": "STOLIDI rident verba latina", "case": "nominative", "use": "subject"},
-    {"text": "Tempus edax RERUM est.", "case": "genitive", "use": "objective"},
-    {"text": "Tempus EDAX rerum est.", "case": "nominative", "use": "apposition"},
-    {"text": "Paulatim lenta consumitis omnia MORTE.", "case": "ablative", "use": "means"},
-    {"text": "Maxima pars VITAE elabitur male agentibus", "case": "genitive", "use": "partitive"},
-    {"text": "Haec eorum potentia non a viribus sed ab IMBECILLITATE descendit", "case": "ablative", "use": "place from which"},
-    {"text": "Homo et animal omne ELEMENTORUM concretio est.", "case": "genitive", "use": "partitive"},
-    {"text": "DUBITANDO ad veritatem pervenimus", "case": "ablative", "use": "means"},
-    {"text": "Milites FORTISSIMO AUXILIO Carthaginiensibus misit.", "case": "dative", "use": "purpose"},
-    {"text": "Da MI basia mille, deinde centum.", "case": "dative", "use": "indirect object"},
-    {"text": "Tu ne cede MALIS, sed contra audentior ito.", "case": "dative", "use": "special verbs"},
-    {"text": "Homo HOMINI lupus est.", "case": "dative", "use": "reference"},
-    {"text": "Vivamus, mea LESBIA, atque amemus.", "case": "vocative", "use": "address"},
-    {"text": "IGNORANTI, quem portum petat, nullus suus ventus est", "case": "dative", "use": "reference"},
-    {"text": "Carpe diem, quam MINIMUM credula postero.", "case": "accusative", "use": "adverbial"},
-    {"text": "Dulce et decorum est pro patria mori.", "case": "nominative", "use": "predicate"},
-    {"text": "Nunc MIHI est bibendum.", "case": "dative", "use": "agent"},
-    {"text": "Carthago delenda est NOBIS.", "case": "dative", "use": "agent"},
-    {"text": "Non qui PARUM habet, sed qui plus cupit, pauper est.", "case": "accusative", "use": "adverbial"},
-    {"text": "Persuadere potest religio HOMINIBUS.", "case": "dative", "use": "special verbs"}
+    {
+        "quote": "Gallia est omnis divisa in partes tres, QUARUM unam incolunt Belgae",
+        "case": "genitive",
+        "use": ["partitive"]
+    },
+    {
+        "quote": "HIS REBUS adducti et auctoritate Orgetorigis permoti constituerunt ea quae ad proficiscendum pertinerent comparare",
+        "case": "ablative",
+        "use": ["means", "cause"]
+    },
+    {
+        "quote": "Post eius mortem NIHILO minus Helvetii id quod constituerant facere conantur, ut e finibus suis exeant",
+        "case": "ablative",
+        "use": ["degree of difference"]
+    },
+    {
+        "quote": "Erant omnino itinera duo, QUIBUS ITINERIBUS domo exire possent",
+        "case": "ablative",
+        "use": ["means"]
+    },
+    {
+        "quote": "Maturat ab URBE proficisci et quam maximis potest itineribus in Galliam ulteriorem contendit",
+        "case": "ablative",
+        "use": ["place from which", "separation"]
+    },
+    {
+        "quote": "At barbari, CONSILIO Romanorum COGNITO praemisso equitatu et essedariis...",
+        "case": "ablative",
+        "use": ["absolute"]
+    },
+    {
+        "quote": "Ita UNO TEMPORE omnia accidunt.",
+        "case": "ablative",
+        "use": ["time within which", "time when"]
+    },
+    {
+        "quote": "MIHI Delphica tellus...",
+        "case": "dative",
+        "use": ["reference"]
+    },
+    {
+        "quote": "Amor est mihi causa SEQUENDI!",
+        "case": "genitive",
+        "use": ["with special preposition", "objective"]
+    },
+    {
+        "quote": "Delius hunc nuper, VICTA SERPENTE superbus, viderat.",
+        "case": "ablative",
+        "use": ["absolute"]
+    },
+    {
+        "quote": "Delius hunc nuper, victa serpente SUPERBUS, viderat.",
+        "case": "nominative",
+        "use": ["apposition"]
+    },
+    {
+        "quote": "Dixit, 'VIRGINITATE frui!'",
+        "case": "ablative",
+        "use": ["with special verbs"]
+    },
+    {
+        "quote": "ATHENIS genitor omnia omnibus fecit.",
+        "case": "locative",
+        "use": ["place where"]
+    },
+    {
+        "quote": "Ecce amicus AVUNCULI...",
+        "case": "genitive",
+        "use": ["possession"]
+    },
+    {
+        "quote": "Ecce amicus avunculi qui nūper ad eum ex HISPANIA vēnerat",
+        "case": "ablative",
+        "use": ["place from which"]
+    },
+    {
+        "quote": "Tum vero idem ille... ACRIUS...",
+        "case": "accusative",
+        "use": ["adverbial"]
+    },
+    {
+        "quote": "Respondimus nōn COMMISUROS NOS...",
+        "case": "accusative",
+        "use": ["subject of the infinitive"]
+    },
+    {
+        "quote": "Nec MULTO post illa nūbēs...",
+        "case": "ablative",
+        "use": ["degree of difference"]
+    },
+    {
+        "quote": "Nec multō post illa nūbēs... in TERRAS",
+        "case": "accusative",
+        "use": ["place to which"]
+    },
+    {
+        "quote": "STOLIDI rident verba latina",
+        "case": "nominative",
+        "use": ["subject"]
+    },
+    {
+        "quote": "Tempus edax RERUM est.",
+        "case": "genitive",
+        "use": ["objective"]
+    },
+    {
+        "quote": "Tempus EDAX rerum est.",
+        "case": "nominative",
+        "use": ["apposition"]
+    },
+    {
+        "quote": "Paulatim lenta consumitis omnia MORTE.",
+        "case": "ablative",
+        "use": ["means", "cause"]
+    },
+    {
+        "quote": "Maxima pars VITAE elabitur...",
+        "case": "genitive",
+        "use": ["partitive"]
+    },
+    {
+        "quote": "Haec eorum potentia... ab IMBECILLITATE descendit",
+        "case": "ablative",
+        "use": ["place from which"]
+    },
+    {
+        "quote": "Homo et animal omne ELEMENTORUM concretio est.",
+        "case": "genitive",
+        "use": ["partitive"]
+    },
+    {
+        "quote": "DUBITANDO ad veritatem pervenimus",
+        "case": "ablative",
+        "use": ["means"]
+    },
+    {
+        "quote": "Milites FORTISSIMO AUXILIO...",
+        "case": "dative",
+        "use": ["purpose"]
+    },
+    {
+        "quote": "Da MI basia mille...",
+        "case": "dative",
+        "use": ["indirect object"]
+    },
+    {
+        "quote": "Tu ne cede MALIS...",
+        "case": "dative",
+        "use": ["special verbs"]
+    },
+    {
+        "quote": "Homo HOMINI lupus est.",
+        "case": "dative",
+        "use": ["reference"]
+    },
+    {
+        "quote": "Vivamus, mea LESBIA, atque amemus.",
+        "case": "vocative",
+        "use": ["address"]
+    },
+    {
+        "quote": "IGNORANTI, quem portum petat...",
+        "case": "dative",
+        "use": ["possession", "reference"]
+    },
+    {
+        "quote": "Carpe diem, quam MINIMUM credula postero.",
+        "case": "accusative",
+        "use": ["adverbial"]
+    },
+    {
+        "quote": "Dulce et decorum est pro patria mori.",
+        "case": "nominative",
+        "use": ["predicate"]
+    },
+    {
+        "quote": "Nunc MIHI est bibendum.",
+        "case": "dative",
+        "use": ["agent"]
+    },
+    {
+        "quote": "Carthago delenda est NOBIS.",
+        "case": "dative",
+        "use": ["agent"]
+    },
+    {
+        "quote": "Non qui PARUM habet...",
+        "case": "accusative",
+        "use": ["adverbial"]
+    },
+    {
+        "quote": "Persuadere potest religio HOMINIBUS.",
+        "case": "dative",
+        "use": ["special verbs"]
+    }
 ]
 
 NOVICE_QUOTES = [
