@@ -3,6 +3,24 @@
 <head>
   <title>Case&Use</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      height: 60px;
+      width: auto;
+    }
+
+    .quiz-area h1 {
+      margin: 0;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -16,7 +34,11 @@
 
     <!-- Quiz Interaction (RIGHT) -->
     <div class="quiz-area">
-      <h1>Case&Use</h1>
+      <div class="header">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+        <h1>Case&Use</h1>
+      </div>
+
       <h2 id="quote">{{ quote }}</h2>
 
       <form method="POST">
