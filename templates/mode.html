@@ -4,37 +4,44 @@
     <title>Select Mode - Case&Use</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
-        .title-logo-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .logo {
-            height: 60px;
-            width: auto;
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
         .mode-selection {
             text-align: center;
-            margin-top: 100px;
+            padding-top: 50px;
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .logo-title img {
+            height: 60px;
+            width: auto;
         }
 
         .mode-btn {
-            margin: 10px;
-            padding: 10px 20px;
             font-size: 18px;
+            padding: 12px 24px;
+            margin: 10px;
             cursor: pointer;
         }
     </style>
 </head>
 <body>
     <div class="mode-selection">
-        <div class="title-logo-container">
+        <div class="logo-title">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
             <h1><em>Case&Use</em></h1>
-            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
         </div>
         <h2>Select a Mode:</h2>
         <a href="{{ url_for('set_mode', mode='novice') }}"><button class="mode-btn">Novice – 10 points each</button></a>
